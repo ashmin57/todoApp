@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'model/todo.dart';
+import 'todo_tile.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -37,79 +40,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value!;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text("New Task 1"),
-                // const SizedBox(
-                //   width: 20,
-                // ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Icon(
-                        Icons.delete,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value!;
-                    });
-                  },
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text("New Task 2"),
-                // const SizedBox(
-                //   width: 20,
-                // ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Icon(
-                        Icons.delete,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
+        child: ListView.builder(
+          itemCount: todos.length,
+          itemBuilder: (context, index) {
+            return TodoTile(
+              todo: todos[index],
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
