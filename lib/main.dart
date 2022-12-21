@@ -5,3 +5,8 @@ import 'my_app.dart';
 void main() {
   runApp(const MyApp());
 }
+
+
+// flutter clean
+// flutter pub get
+// flutter upgrade 

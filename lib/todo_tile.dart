@@ -4,41 +4,34 @@ import 'model/todo.dart';
 
 class TodoTile extends StatelessWidget {
   const TodoTile({
-    super.key,
+    Key? key,
     required this.todo,
-  });
+    required this.onDelete,
+    required this.onToggle,
+  }) : super(key: key);
 
   final Todo todo;
+  final Function(int id) onDelete;
+  final Function(int id) onToggle;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Checkbox(
           value: todo.isCompleted,
-          onChanged: (value) {},
+          onChanged: (_) {
+            onToggle(todo.id);
+          },
         ),
-        const SizedBox(
-          width: 20,
+        const SizedBox(width: 20),
+        Expanded(child: Text(todo.title)),
+        IconButton(
+          onPressed: () {
+            onDelete(todo.id);
+          },
+          icon: const Icon(Icons.delete),
         ),
-        Text(todo.title),
-        // const SizedBox(
-        //   width: 20,
-        // ),
-        const Spacer(),
-        ElevatedButton(
-          onPressed: () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
-              Icon(
-                Icons.delete,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        )
       ],
     );
   }
